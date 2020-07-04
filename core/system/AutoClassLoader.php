@@ -19,9 +19,12 @@ class AutoClassLoader
     {
         if (empty(self::$dirs)) {
             self::$dirs = array(
-                APP_ROOT_PATH . '/config',
-                CORE_ROOT_PATH . '/include',
-                CORE_ROOT_PATH . '/controllers'
+                CORE_ROOT_PATH . 'config',
+                CORE_ROOT_PATH . 'include',
+                CORE_ROOT_PATH . 'controllers',
+                CORE_ROOT_PATH . 'controllers/admin',
+                CORE_ROOT_PATH . 'controllers/pc',
+                CORE_ROOT_PATH . 'controllers/sp',
             );
         }
         return self::$dirs;

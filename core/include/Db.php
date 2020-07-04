@@ -7,13 +7,13 @@ class Db {
      */
     static public function connect() {
         // ドライバ呼び出しを使用して MySQL データベースに接続します
-        $dbname = Config::getDbName();
-        $host = Config::getHost();
-        $dsn = "mysql:dbname={$dbname};host={$host}";
-        $user = Config::getUser();
-        $password = Config::getPassword();
+        $db_schema = Database::getDbSchema();
+        $db_host = Database::getDbHost();
+        $db_dsn = "mysql:dbname={$db_schema};host={$db_host}";
+        $db_user = Database::getDbUser();
+        $db_password = Database::getDbPassword();
         try {
-            Db::$dbh = new PDO($dsn, $user, $password);
+            Db::$dbh = new PDO($db_dsn, $db_user, $db_password);
         } catch (PDOException $e) {
             echo "接続失敗: " . $e->getMessage() . "\n";
             exit();
@@ -24,8 +24,8 @@ class Db {
      * SQLを実行する
      */
     static public function query($sql, $params=null) {
-        $prepare = Db::_execute($sql, $params);
-        return $prepare->fetchAll(PDO::FETCH_ASSOC);
+        $sth = Db::_execute($sql, $params);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
