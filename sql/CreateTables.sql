@@ -1,4 +1,4 @@
-CREATE TABLE `users` (
+CREATE TABLE `administrators` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ユーザー名',
   `login` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ユーザーID',
@@ -15,7 +15,47 @@ CREATE TABLE `users` (
   `deleted_flg` tinyint(4) NOT NULL DEFAULT '0' COMMENT '削除フラグ\n0 : 未削除\n1 : 削除済',
   PRIMARY KEY (`id`),
   KEY `auth_login_pass` (`login`,`pass`),
-  KEY `auth_email_pass` (`email`,`pass`)
+  KEY `auth_email_pass` (`email`,`pass`),
+  KEY `search` (`permission`,`stat`,`email`,`pass`,`login`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ユーザー名',
+  `login` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ユーザーID',
+  `pass` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'パスワード',
+  `email` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'メールアドレス',
+  `stat` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'ユーザー状態\n0 : 未指定\n1 : 有効\n2 : 仮登録\n9 : 無効',
+  `permission` int(11) NOT NULL DEFAULT '0' COMMENT '権限\n0 : 未指定\n1 : ユーザー\n',
+  `created_in` datetime NOT NULL COMMENT '作成日時',
+  `created_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '作成者ID',
+  `created_ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '作成者IP',
+  `updated_at` datetime NOT NULL COMMENT '更新日時',
+  `updated_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '更新者ID',
+  `updated_ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '更新者IP',
+  `deleted_flg` tinyint(4) NOT NULL DEFAULT '0' COMMENT '削除フラグ\n0 : 未削除\n1 : 削除済',
+  PRIMARY KEY (`id`),
+  KEY `auth_login_pass` (`login`,`pass`),
+  KEY `auth_email_pass` (`email`,`pass`),
+  KEY `search` (`permission`,`stat`,`email`,`pass`,`login`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `plugins` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `plugin_id` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'プラグインID',
+  `name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'プラグイン名',
+  `reference` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'プラグイン説明',
+  `stat` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'ページ状態\n0 : 未指定\n1 : 有効\n2 : 下書き\n9 : 無効',
+  `created_in` datetime NOT NULL COMMENT '作成日時',
+  `created_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '作成者ID',
+  `created_ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '作成者IP',
+  `updated_at` datetime NOT NULL COMMENT '更新日時',
+  `updated_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '更新者ID',
+  `updated_ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '更新者IP',
+  `deleted_flg` tinyint(4) NOT NULL DEFAULT '0' COMMENT '削除フラグ\n0 : 未削除\n1 : 削除済',
+  PRIMARY KEY (`id`),
+  KEY `plugin_id` (`plugin_id`),
+  KEY `search` (`stat`,`name`,`plugin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `pages` (
