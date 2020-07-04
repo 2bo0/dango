@@ -103,45 +103,51 @@ class Router {
         }
     }
 
-    public static function get($uri, $class, $classMethod) {
+    public static function get($uri, $class, $classMethod, $authRequired=false) {
         Router::$data[Router::REQUEST_METHOD_GET][$uri] = array(
             "class" => $class,
             "method" => $classMethod,
+            "authRequired" => $authRequired,
         );
     }
 
-    public static function post($uri, $class, $classMethod) {
+    public static function post($uri, $class, $classMethod, $authRequired=false) {
         Router::$data[Router::REQUEST_METHOD_POST][$uri] = array(
             "class" => $class,
             "method" => $classMethod,
+            "authRequired" => $authRequired,
         );
     }
 
-    public static function put($uri, $class, $classMethod) {
+    public static function put($uri, $class, $classMethod, $authRequired=false) {
         Router::$data[Router::REQUEST_METHOD_PUT][$uri] = array(
             "class" => $class,
             "method" => $classMethod,
+            "authRequired" => $authRequired,
         );
     }
 
-    public static function delete($uri, $class, $classMethod) {
+    public static function delete($uri, $class, $classMethod, $authRequired=false) {
         Router::$data[Router::REQUEST_METHOD_DELETE][$uri] = array(
             "class" => $class,
             "method" => $classMethod,
+            "authRequired" => $authRequired,
         );
     }
 
-    public static function head($uri, $class, $classMethod) {
+    public static function head($uri, $class, $classMethod, $authRequired=false) {
         Router::$data[Router::REQUEST_METHOD_HEAD][$uri] = array(
             "class" => $class,
             "method" => $classMethod,
+            "authRequired" => $authRequired,
         );
     }
 
-    public static function options($uri, $class, $classMethod) {
+    public static function options($uri, $class, $classMethod, $authRequired=false) {
         Router::$data[Router::REQUEST_METHOD_OPTIONS][$uri] = array(
             "class" => $class,
             "method" => $classMethod,
+            "authRequired" => $authRequired,
         );
     }
 }
