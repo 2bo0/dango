@@ -31,6 +31,14 @@ class Db {
     /**
      * SQLを実行する
      */
+    static public function queryOne($sql, $params=null) {
+        $sth = Db::_execute($sql, $params);
+        return $sth->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * SQLを実行する
+     */
     static public function execute($sql, $params=null) {
         Db::_execute($sql, $params);
     }
