@@ -50,7 +50,7 @@ class AuthAdmin {
             "stat"=>AuthAdmin::STAT_REGISTERED,
             "active"=>AuthAdmin::ACTIVE_CONFIRMED,
         );
-        $_login = Db::queryOne($_sql, $_params);
+        $_login = Database::queryOne($_sql, $_params);
         if (!empty($_login)) {
             $_SESSION['login']=$_login['login'];
             $_SESSION['pass']=$_login['pass'];
@@ -70,7 +70,7 @@ class AuthAdmin {
             "stat"=>AuthAdmin::STAT_REGISTERED,
             "active"=>AuthAdmin::ACTIVE_CONFIRMED,
         );
-        $_login = Db::queryOne($_sql, $_params);
+        $_login = Database::queryOne($_sql, $_params);
         if (!empty($_login)) {
             $_SESSION['login']=$_login['login'];
             $_SESSION['pass']=$_login['pass'];

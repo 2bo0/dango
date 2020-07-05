@@ -19,7 +19,7 @@ class AutoClassLoader
     {
         if (empty(self::$dirs)) {
             self::$dirs = array(
-                CORE_ROOT_PATH . 'config',
+                CORE_ROOT_PATH . 'include/models',
                 CORE_ROOT_PATH . 'include',
                 CORE_ROOT_PATH . 'controllers',
                 CORE_ROOT_PATH . 'controllers/admin',

@@ -1,6 +1,43 @@
 <?php
-class Db {
+class Database {
+    static private $db_schema = "";
+    static private $db_host = "";
+    static private $db_user = "";
+    static private $db_password = "";
+
     static private $dbh;
+
+    static public function getDbSchema(){
+        return Database::$db_schema;
+    }
+
+    static public function setDbSchema($db_schema){
+        Database::$db_schema = $db_schema;
+    }
+
+    static public function getDbHost(){
+        return Database::$db_host;
+    }
+
+    static public function setDbHost($db_host){
+        Database::$db_host = $db_host;
+    }
+
+    static public function getDbUser(){
+        return Database::$db_user;
+    }
+
+    static public function setDbUser($db_user){
+        Database::$db_user = $db_user;
+    }
+
+    static public function getDbPassword(){
+        return Database::$db_password;
+    }
+
+    static public function setDbPassword($db_password){
+        Database::$db_password = $db_password;
+    }
 
     /**
      * DB接続する
@@ -13,7 +50,7 @@ class Db {
         $db_user = Database::getDbUser();
         $db_password = Database::getDbPassword();
         try {
-            Db::$dbh = new PDO($db_dsn, $db_user, $db_password);
+            Database::$dbh = new PDO($db_dsn, $db_user, $db_password);
         } catch (PDOException $e) {
             echo "接続失敗: " . $e->getMessage() . "\n";
             exit();
@@ -24,7 +61,7 @@ class Db {
      * SQLを実行する
      */
     static public function query($sql, $params=null) {
-        $sth = Db::_execute($sql, $params);
+        $sth = Database::_execute($sql, $params);
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -32,7 +69,7 @@ class Db {
      * SQLを実行する
      */
     static public function queryOne($sql, $params=null) {
-        $sth = Db::_execute($sql, $params);
+        $sth = Database::_execute($sql, $params);
         return $sth->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -40,7 +77,7 @@ class Db {
      * SQLを実行する
      */
     static public function execute($sql, $params=null) {
-        Db::_execute($sql, $params);
+        Database::_execute($sql, $params);
     }
 
     /**
@@ -56,7 +93,7 @@ class Db {
                 }
             }
         }
-        $prepare = Db::$dbh->prepare($sql);
+        $prepare = Database::$dbh->prepare($sql);
         if ($work_params !== null && is_array($work_params)) {
             foreach ($work_params as $key => $val) {
                 $prepare->bindValue(":{$key}", "$val");
@@ -66,6 +103,3 @@ class Db {
         return $prepare;
     }
 }
-
-// DB接続する
-Db::connect();

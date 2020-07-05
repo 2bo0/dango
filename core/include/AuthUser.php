@@ -44,7 +44,7 @@ class AuthUser {
             "stat"=>AuthUser::STAT_REGISTERED,
             "active"=>AuthUser::ACTIVE_CONFIRMED,
         );
-        $_login = Db::queryOne($_sql, $_params);
+        $_login = Database::queryOne($_sql, $_params);
         if (!empty($_login)) {
             $_SESSION['login']=$_login['login'];
             $_SESSION['pass']=$_login['pass'];
@@ -64,7 +64,7 @@ class AuthUser {
             "stat"=>AuthUser::STAT_REGISTERED,
             "active"=>AuthUser::ACTIVE_CONFIRMED,
         );
-        $_login = Db::queryOne($_sql, $_params);
+        $_login = Database::queryOne($_sql, $_params);
         if (!empty($_login)) {
             $_SESSION['login']=$_login['login'];
             $_SESSION['pass']=$_login['pass'];
