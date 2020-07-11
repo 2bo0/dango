@@ -17,43 +17,54 @@ class Router {
         Router::REQUEST_METHOD_OPTIONS => array(),
     );
 
+    public static function redirect($url) {
+        header("Location: {$url}", true, 302 );
+        exit;
+    }
+
     public static function isGet() {
-        if (Router::REQUEST_METHOD_GET === (isset($_SERVER["REQUEST_METHOD"])) ? $_SERVER["REQUEST_METHOD"] : Router::REQUEST_METHOD_GET) {
+        $req_method=(isset($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "");
+        if (Router::REQUEST_METHOD_GET === $req_method) {
             return true;
         }
         return false;
     }
 
     public static function isPost() {
-        if (Router::REQUEST_METHOD_POST === (isset($_SERVER["REQUEST_METHOD"])) ? $_SERVER["REQUEST_METHOD"] : Router::REQUEST_METHOD_GET) {
+        $req_method=(isset($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "");
+        if (Router::REQUEST_METHOD_POST === $req_method) {
             return true;
         }
         return false;
     }
 
     public static function isPut() {
-        if (Router::REQUEST_METHOD_PUT === (isset($_SERVER["REQUEST_METHOD"])) ? $_SERVER["REQUEST_METHOD"] : Router::REQUEST_METHOD_GET) {
+        $req_method=(isset($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "");
+        if (Router::REQUEST_METHOD_PUT === $req_method) {
             return true;
         }
         return false;
     }
 
     public static function isDelete() {
-        if (Router::REQUEST_METHOD_DELETE === (isset($_SERVER["REQUEST_METHOD"])) ? $_SERVER["REQUEST_METHOD"] : Router::REQUEST_METHOD_GET) {
+        $req_method=(isset($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "");
+        if (Router::REQUEST_METHOD_DELETE === $req_method) {
             return true;
         }
         return false;
     }
 
     public static function isHead() {
-        if (Router::REQUEST_METHOD_HEAD === (isset($_SERVER["REQUEST_METHOD"])) ? $_SERVER["REQUEST_METHOD"] : Router::REQUEST_METHOD_GET) {
+        $req_method=(isset($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "");
+        if (Router::REQUEST_METHOD_HEAD === $req_method) {
             return true;
         }
         return false;
     }
 
     public static function isOptions() {
-        if (Router::REQUEST_METHOD_OPTIONS === (isset($_SERVER["REQUEST_METHOD"])) ? $_SERVER["REQUEST_METHOD"] : Router::REQUEST_METHOD_GET) {
+        $req_method=(isset($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "");
+        if (Router::REQUEST_METHOD_OPTIONS === $req_method) {
             return true;
         }
         return false;

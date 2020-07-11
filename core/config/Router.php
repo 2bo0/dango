@@ -1,6 +1,7 @@
 <?php
 Router::get("/admin/", "AdminTopController", "index");
 Router::get("/admin/login", "AdminLoginController", "index");
+Router::post("/admin/login", "AdminLoginController", "index");
 Router::get("/admin/logout", "AdminLogoutController", "index");
 Router::get("/admin/plugins", "AdminPluginsController", "index");
 Router::post("/admin/plugins", "AdminPluginsController", "index");

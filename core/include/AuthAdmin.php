@@ -39,11 +39,11 @@ class AuthAdmin {
         AuthAdmin::ACTIVE_REFUSAL => "Refusal",
     );
 
-    const AUTH_KEY_VALUE="admin_auth";
+    const AUTH_KEY_NAME="admin_auth";
 
     public static function loginId($loginId, $password) {
-        $_auth_key_value=AuthUser::AUTH_KEY_VALUE;
-        $_sql="SELECT login, pass, permission, '{$_auth_key_value}' AS user_auth FROM administrators WHERE login = :login AND pass = :pass AND stat = :stat AND active = :active;";
+        $_auth_key_value=AuthAdmin::AUTH_KEY_NAME;
+        $_sql="SELECT login, pass, permission, '{$_auth_key_value}' AS {$_auth_key_value} FROM administrators WHERE login = :login AND pass = :pass AND stat = :stat AND active = :active;";
         $_params=array(
             "login"=>$loginId,
             "pass"=>$password,
@@ -55,14 +55,14 @@ class AuthAdmin {
             $_SESSION['login']=$_login['login'];
             $_SESSION['pass']=$_login['pass'];
             $_SESSION['permission']=$_login['permission'];
-            $_SESSION['user_auth']=AuthAdmin::AUTH_KEY_VALUE;
+            $_SESSION[AuthAdmin::AUTH_KEY_NAME]=$_login[AuthAdmin::AUTH_KEY_NAME];
             return true;
         }
         return false;
     }
 
     public static function loginEmail($email, $password) {
-        $_auth_key_value=AuthAdmin::AUTH_KEY_VALUE;
+        $_auth_key_value=AuthAdmin::AUTH_KEY_NAME;
         $_sql="SELECT login, pass, permission, '{$_auth_key_value}' AS {$_auth_key_value} FROM administrators WHERE email = :email AND pass = :pass AND stat = :stat AND active = :active;";
         $_params=array(
             "email"=>$email,
@@ -75,7 +75,7 @@ class AuthAdmin {
             $_SESSION['login']=$_login['login'];
             $_SESSION['pass']=$_login['pass'];
             $_SESSION['permission']=$_login['permission'];
-            $_SESSION['user_auth']=AuthAdmin::AUTH_KEY_VALUE;
+            $_SESSION[AuthAdmin::AUTH_KEY_NAME]=$_login[AuthAdmin::AUTH_KEY_NAME];
             return true;
         }
         return false;
@@ -93,7 +93,7 @@ class AuthAdmin {
     }
 
     public static function isLogin() {
-        if (!empty($_SESSION[AuthAdmin::AUTH_KEY_VALUE]) && $_SESSION[AuthAdmin::AUTH_KEY_VALUE]===AuthAdmin::AUTH_KEY_VALUE) {
+        if (!empty($_SESSION[AuthAdmin::AUTH_KEY_NAME]) && $_SESSION[AuthAdmin::AUTH_KEY_NAME]===AuthAdmin::AUTH_KEY_NAME) {
             return true;
         }
         return false;
