@@ -3,8 +3,10 @@ class AdminLoginController extends AdminAppController
 {
     public function index() {
         if (AuthAdmin::isLogin()==true) {
-            header('Location: /admin/', true, 302 );
-            exit;
+            // ログインしている場合、
+
+            // トップ画面にリダイレクトする
+            Router::redirect('/admin/');
         }
         if (Router::isPost()==true) {
             // POST処理があった時、
@@ -18,12 +20,12 @@ class AdminLoginController extends AdminAppController
                     // ログインIDでログインに成功した場合、
 
                     // トップ画面にリダイレクトする
-                    Router::redirect('/admin/login');
+                    Router::redirect('/admin/');
                 } else if (AuthAdmin::loginEmail($_POST["login_id"], $_POST["password"])==true) {
                     // メールアドレスでログインに成功した場合、
 
                     // トップ画面にリダイレクトする
-                    Router::redirect('/admin/login');
+                    Router::redirect('/admin/');
                 } else {
                     // ログインに失敗した場合、
 
